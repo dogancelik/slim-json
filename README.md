@@ -1,5 +1,5 @@
 # SlimJson
-SlimJson is an easy-to-use and advanced JSON package for Slim PHP framework. SlimJson helps you write web apps that return JSON output.
+SlimJson is an easy-to-use and advanced JSON middleware for Slim PHP framework. SlimJson helps you write web apps that return JSON output.
 
 ## How to install
 You can install SlimJson with Composer by:
