@@ -17,7 +17,9 @@ require 'vendor/autoload.php';
 $app = new \Slim\Slim();
 
 // Add the middleware globally
-$app->add(new \SlimJson\Middleware());
+$app->add(new \SlimJson\Middleware(array(
+  'json.status' => true
+)));
 
 $app->get('/', function() use ($app) {
   $app->render(200, ['Hello' => 'World']);
