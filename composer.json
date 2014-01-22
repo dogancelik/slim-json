@@ -1,0 +1,23 @@
+{
+  "name": "dogancelik/slim-json",
+  "type": "library",
+  "description": "JSON middleware for Slim PHP framework",
+  "keywords": ["slim", "json", "middleware", "view"],
+  "homepage": "http://github.com/dogancelik/slim-json",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Doğan Çelik",
+      "email": "iletisim@dogancelik.com",
+      "homepage": "http://dogancelik.com/"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0"
+  },
+  "autoload": {
+    "psr-0": {
+      "SlimJson": "."
+    }
+  }
+}
