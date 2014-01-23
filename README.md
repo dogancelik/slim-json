@@ -1,4 +1,4 @@
-# SlimJson
+# SlimJson [![Latest Stable Version](https://poser.pugx.org/dogancelik/slim-json/v/stable.png)](https://packagist.org/packages/dogancelik/slim-json)
 SlimJson is an easy-to-use and advanced JSON middleware for Slim PHP framework. SlimJson helps you write web apps that return JSON output.
 
 ## How to install
