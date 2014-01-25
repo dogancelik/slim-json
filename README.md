@@ -18,7 +18,8 @@ $app = new \Slim\Slim();
 
 // Add the middleware globally
 $app->add(new \SlimJson\Middleware(array(
-  'json.status' => true
+  'json.status' => true,
+  'json.override_error' => true
 )));
 
 $app->get('/', function() use ($app) {
