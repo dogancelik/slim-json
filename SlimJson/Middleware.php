@@ -101,7 +101,7 @@ class Middleware extends \Slim\Middleware {
       $cors = $app->config(Config::Cors);
       if ($cors) {
         if(\is_callable($cors)) {
-          $origin = $cors;
+          $origin = \call_user_func($cors, $app->request());
         } else {
           if (!\is_string($cors)) {
             $origin = '*';
