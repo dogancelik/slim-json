@@ -101,15 +101,18 @@ class Middleware extends \Slim\Middleware {
       $cors = $app->config(Config::Cors);
       if ($cors) {
         if(\is_callable($cors)) {
-          $origin = \call_user_func($cors, $app->request());
+          $allowOrigin = \call_user_func($cors, $app->request()->headers->get('Origin'));
         } else {
           if (!\is_string($cors)) {
-            $origin = '*';
+            $allowOrigin = '*';
           } else {
-            $origin = $cors;
+            $allowOrigin = $cors;
           }
         }
-        $app->response()->header('Access-Control-Allow-Origin', $origin);
+
+        if($allowOrigin) {
+          $app->response()->header('Access-Control-Allow-Origin', $allowOrigin);
+        }
       }
 
       if ($app->config(Config::Protect)) {
