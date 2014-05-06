@@ -32,7 +32,7 @@ class View extends \Slim\View {
     }
 
     $app->response()->header('Content-Type', 'application/json');
-    $app->response()->body(json_encode($response));
+    return json_encode($response);
   }
 
 }
