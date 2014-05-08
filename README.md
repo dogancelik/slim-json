@@ -27,7 +27,7 @@ $app->get('/', function() use ($app) {
   $app->render(200, ['Hello' => 'World']);
 });
 
-$app->get('/error', function() use ($app)) {
+$app->get('/error', function() use ($app) {
   throw new \Exception('This is an error');
 });
 
