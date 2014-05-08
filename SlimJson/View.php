@@ -14,7 +14,7 @@ class View extends \Slim\View {
   public function render($status, $data = null)
   {
     $app = Slim::getInstance();
-    $response = $this->all();
+    $response = array_merge($this->all(), (array) $data);
 
     $status = \intval($status);
     $app->response()->status($status);
@@ -32,7 +32,6 @@ class View extends \Slim\View {
     }
 
     $app->response()->header('Content-Type', 'application/json');
-    $app->response()->body(json_encode($response));
+    return json_encode($response);
   }
-
 }
