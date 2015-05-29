@@ -93,8 +93,9 @@ If you set a string, it will set CORS to that string
 **[You should read this if you don't use the middleware globally. Read why I added this option.](#slimjson-cleardata)**
 
 ### json.json_encode_options
-Options Argument passed to json_encode (JSON_NUMERIC_CHECK, JSON_PRETTY_PRINT, JSON_UNESCAPED_SLASHES,
-JSON_UNESCAPED_UNICODE...)
+Passes an `$options` argument to `json_encode`.
+
+[Visit PHP.net page for available constants for json_encode.](http://php.net/manual/en/function.json-encode.php#refsect1-function.json-encode-parameters)
 
 ## Advanced
 
