@@ -92,6 +92,10 @@ If you set a string, it will set CORS to that string
 ### json.clear_data
 **[You should read this if you don't use the middleware globally. Read why I added this option.](#slimjson-cleardata)**
 
+### json.json_encode_options
+Options Argument passed to json_encode (JSON_NUMERIC_CHECK, JSON_PRETTY_PRINT, JSON_UNESCAPED_SLASHES,
+JSON_UNESCAPED_UNICODE...)
+
 ## Advanced
 
 ### Use SlimJson for individual routes
