@@ -12,7 +12,7 @@ abstract class Config {
   const Protect = 'json.protect';
   const Cors = 'json.cors';
   const ClearData = 'json.clear_data';
-  const JSonEncodeOptions = 'json.json_encode_options';
+  const JsonEncodeOptions = 'json.json_encode_options';
 }
 
 class Middleware extends \Slim\Middleware {
@@ -34,7 +34,7 @@ class Middleware extends \Slim\Middleware {
       Config::Protect => false,
       Config::Cors => false,
       Config::ClearData => false,
-      Config::JSonEncodeOptions => 0
+      Config::JsonEncodeOptions => 0
     );
     if (\is_array($config)) {
       $config = array_merge($defaultConfig, $config);
