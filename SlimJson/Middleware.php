@@ -17,13 +17,15 @@ abstract class Config {
 
 class Middleware extends \Slim\Middleware {
 
-  /**
+   /**
    * @param array $config
    */
-  function __construct($config = null)
+  function __construct($config = null, $app = null)
   {
-    $app = Slim::getInstance();
-    $app->view(new View());
+    if($app == null){
+      $app = Slim::getInstance();
+    }
+    $app->view(new View($app));
 
     $defaultConfig = array(
       'debug' => false, // Disable PrettyException middleware
@@ -129,10 +131,8 @@ class Middleware extends \Slim\Middleware {
   }
 
   private function setConfigFunction($config, $func) {
-    $app = Slim::getInstance();
-
     if (\is_callable($func) || \is_bool($func)) {
-      $app->config($config, $func);
+      $this->app->config($config, $func);
       return true;
     } else {
       return false;
