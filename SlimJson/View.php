@@ -32,11 +32,11 @@ class View extends \Slim\View {
     }
 
     $app->response()->header('Content-Type', 'application/json');
-    $body = json_encode($response, $app->config(Config::JsonEncodeOptions)));
+    $body = json_encode($response, $app->config(Config::JsonEncodeOptions));
     if($status == 404){
         return $body;
     }else{
         $app->response()->body($body);
     }
-
+ }
 }
