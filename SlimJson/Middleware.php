@@ -55,7 +55,7 @@ class Middleware extends \Slim\Middleware {
           'error' =>
             isset($func)
               ? \call_user_func($func, $e)
-              : ($e->getCode() ? '' : '(#' . $e->getCode() . ') ') . $e->getMessage()
+              : ($e->getCode() ? '(#' . $e->getCode() . ') ' : '') . $e->getMessage()
         );
 
         if ($app->config(Config::Debug)) {
