@@ -17,13 +17,15 @@ abstract class Config {
 
 class Middleware extends \Slim\Middleware {
 
-  /**
+   /**
    * @param array $config
    */
-  function __construct($config = null)
+  function __construct($config = null, $app = null)
   {
-    $app = Slim::getInstance();
-    $app->view(new View());
+    if($app == null){
+      $app = Slim::getInstance();
+    }
+    $app->view(new View($app));
 
     $defaultConfig = array(
       'debug' => false, // Disable PrettyException middleware
@@ -95,44 +97,62 @@ class Middleware extends \Slim\Middleware {
       $app->view->clear();
     }
 
-    $app->hook('slim.after.router', function () use ($app) {
-      if($app->response()->header('Content-Type') === 'application/octet-stream') {
-        return;
-      }
-
+    $app->hook('slim.before', function () use ($app) {
+      $app->response()->header('Access-Control-Allow-Origin', "*");
+      $test = $app->request()->headers();
       $cors = $app->config(Config::Cors);
       if ($cors) {
-        if(\is_callable($cors)) {
-          $allowOrigin = \call_user_func($cors, $app->request()->headers->get('Origin'));
-        } else {
-          if (!\is_string($cors)) {
-            $allowOrigin = '*';
-          } else {
-            $allowOrigin = $cors;
-          }
+        
+        if($cors === true){
+            $allowOrigin = "*";
         }
+        else if(is_callable($cors)){
+            $allowOrigin = \call_user_func($cors, $app->request()->headers->get('Origin'));
+        }
+        else if(stristr($cors, "*"))
+        {
+              $origin = $app->request()->headers->get('Origin');
+              $pattern = str_replace(".", "\.", $cors);
+              $pattern = str_replace("*", "(.)+", $pattern);
+              if(preg_match("/".$pattern."/", $origin)){
+                  $allowOrigin = $origin;
+              }else{
+                  $allowOrigin = false;
+              }  
+        }else{
+            $allowOrigin = $cors;
+        }
+        
 
         if($allowOrigin) {
           $app->response()->header('Access-Control-Allow-Origin', $allowOrigin);
         }
+       
       }
 
-      if ($app->config(Config::Protect)) {
-        $app->response()->body('while(1);' . $app->response()->body());
-      }
+      
+    });
+    
+    $app->hook('slim.after.router', function () use ($app) {
+        if($app->response()->header('Content-Type') === 'application/octet-stream') {
+            $app->response()->headers->remove("Access-Control-Allow-Origin");
+        }
+        
+        if ($app->config(Config::Protect)) {
+          $app->response()->body('while(1);' . $app->response()->body());
+        }
     });
   }
-
+  
+  
   public function call()
   {
     $this->next->call();
   }
 
   private function setConfigFunction($config, $func) {
-    $app = Slim::getInstance();
-
     if (\is_callable($func) || \is_bool($func)) {
-      $app->config($config, $func);
+      $this->app->config($config, $func);
       return true;
     } else {
       return false;
