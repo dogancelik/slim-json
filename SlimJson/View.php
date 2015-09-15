@@ -7,12 +7,12 @@ use Slim\Slim;
 class View extends \Slim\View {
 
   private $app;
-  
+
   public function __construct(\Slim\Slim $app) {
-        $this->app = $app;
-        parent::__construct();
+    $this->app = $app;
+    parent::__construct();
   }
-  
+
   /**
    * @param int|string $status
    * @param array|null $data
@@ -40,10 +40,10 @@ class View extends \Slim\View {
 
     $app->response()->header('Content-Type', 'application/json');
     $body = json_encode($response, $app->config(Config::JsonEncodeOptions));
-    if($status == 404){
-        return $body;
-    }else{
-        $app->response()->body($body);
+    if ($status == 404) {
+      return $body;
+    } else {
+      $app->response()->body($body);
     }
- }
+  }
 }

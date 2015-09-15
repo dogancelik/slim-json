@@ -22,7 +22,7 @@ class Middleware extends \Slim\Middleware {
    */
   function __construct($config = null, $app = null)
   {
-    if($app == null){
+    if ($app == null) {
       $app = Slim::getInstance();
     }
     $app->view(new View($app));
