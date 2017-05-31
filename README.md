@@ -4,7 +4,7 @@ SlimJson is an easy-to-use and advanced JSON middleware for Slim PHP framework. 
 ## How to install
 You can install SlimJson with Composer by:
 ```
-composer install dogancelik/slim-json
+composer require dogancelik/slim-json
 ```
 or adding this line to your `composer.json` file:
 ```
